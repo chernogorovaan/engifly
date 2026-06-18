@@ -53,6 +53,34 @@
   }
   .nav a:hover { opacity: 1; }
   
+  /* Бургер-кнопка */
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
+  }
+  .burger span {
+    width: 26px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .burger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
   /* ===== HERO ===== */
   .hero {
     padding: 80px 0 90px;
@@ -234,16 +262,27 @@
     gap: 14px;
     margin-bottom: 40px;
   }
+  
+  /* Карусель */
   .carousel {
     position: relative;
     max-width: 900px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .carousel__cards {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
     min-height: 380px;
+    width: 100%;
   }
+  
   .teacher-card {
     background: linear-gradient(135deg, #dbeeff, #f6cfe4);
     border-radius: var(--radius);
@@ -300,6 +339,13 @@
   }
   .teacher-card .line:nth-child(1) { width: 80%; margin: 0 auto; }
   .teacher-card .line:nth-child(2) { width: 60%; margin: 0 auto; }
+  
+  /* Стрелочки под карточками */
+  .carousel__controls {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
   
   .carousel-btn {
     width: 48px; height: 48px;
@@ -433,20 +479,56 @@
   
   /* ===== MOBILE ===== */
   @media (max-width: 760px) {
-    .nav { gap: 20px; }
+    /* Показываем бургер */
+    .burger { display: flex; }
+  
+    /* Скрываем обычное меню */
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--blue-dark);
+      padding: 0;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  
+    /* Выпадающее меню активно */
+    .nav.open {
+      max-height: 300px;
+      padding: 16px 0;
+    }
+  
+    .nav a {
+      padding: 14px 24px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav a:last-child { border-bottom: none; }
+    .nav a:hover {
+      background: rgba(255,255,255,0.05);
+      opacity: 1;
+    }
+  
     .how__grid { grid-template-columns: 1fr; }
     .outcomes__grid { grid-template-columns: repeat(2, 1fr); }
     .outcome:nth-child(2),
     .outcome:nth-child(4) { transform: none; }
     .outcome:nth-child(2):hover,
     .outcome:nth-child(4):hover { transform: translateY(-4px); }
-    .carousel { gap: 10px; }
+  
+    .carousel__cards { gap: 10px; }
     .teacher-card { width: 160px; padding: 16px 12px; }
     .teacher-card.center { width: 200px; }
     .teacher-card__photo { width: 80px; height: 80px; }
     .teacher-card.center .teacher-card__photo { width: 100px; height: 100px; }
   }
+  
   @media (max-width: 480px) {
-    .nav { display: none; }
     .outcomes__grid { grid-template-columns: 1fr; }
   }
