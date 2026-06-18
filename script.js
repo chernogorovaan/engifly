@@ -1,4 +1,4 @@
-
+// ===== Бургер-меню =====
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
 
@@ -7,6 +7,7 @@ burger.addEventListener("click", () => {
   nav.classList.toggle("open");
 });
 
+// Закрытие меню при клике по ссылке
 nav.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     burger.classList.remove("active");
@@ -14,104 +15,73 @@ nav.querySelectorAll("a").forEach(link => {
   });
 });
 
-
-const track = document.getElementById("carousel-track");
-const cards = document.querySelectorAll(".teacher-card");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-
-let currentIndex = 1; 
-let isAnimating = false;
-
-function getCardFullWidth() {
-  const card = cards[0];
-  const style = window.getComputedStyle(track);
-  const gap = parseInt(style.gap) || 20;
-  return card.offsetWidth + gap;
-}
-
-function centerCard(index, animate = true) {
-  if (isAnimating && animate) return;
-  isAnimating = true;
-
-  const cardWidth = getCardFullWidth();
-  const containerWidth = track.parentElement.offsetWidth;
-  
-  const offset = -(index * cardWidth) + (containerWidth / 2) - (cards[0].offsetWidth / 2);
-  
-  if (!animate) {
-    track.style.transition = "none";
-  } else {
-    track.style.transition = "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+// ===== Карусель преподавателей =====
+const teachers = [
+  { 
+    name: "Павел Р.", 
+    img: "https://i.pravatar.cc/200?img=12", 
+    role: "Преподаватель<br>General English", 
+    desc: "5 лет опыта. Специализация на разговорном английском и подготовке к рабочим встречам. Делает сложные темы простыми." 
+  },
+  { 
+    name: "Анна Петрова", 
+    img: "https://i.pravatar.cc/200?img=47", 
+    role: "Преподаватель<br>Business English", 
+    desc: "6+ лет опыта преподавания. Помогает подготовиться к рабочим встречам, интервью и переписке на английском языке." 
+  },
+  { 
+    name: "Ольга С.", 
+    img: "https://i.pravatar.cc/200?img=32", 
+    role: "IELTS / TOEFL<br>преподаватель", 
+    desc: "Сдала IELTS на 8.5. Помогает студентам достичь нужного балла и поступить в зарубежные университеты." 
+  },
+  { 
+    name: "Дмитрий К.", 
+    img: "https://i.pravatar.cc/200?img=68", 
+    role: "IELTS Coach", 
+    desc: "Сдал IELTS на 9.0. Готовит к международным экзаменам и академическому письму." 
+  },
+  { 
+    name: "Елена В.", 
+    img: "https://i.pravatar.cc/200?img=20", 
+    role: "General English", 
+    desc: "8 лет опыта. Специализация — разговорный английский для IT-специалистов." 
   }
-  
-  track.style.transform = `translateX(${offset}px)`;
+];
+let centerIdx = 1;
 
-  cards.forEach((card, i) => {
-    card.classList.toggle("active", i === index);
-  });
+function renderCarousel() {
+  const left  = teachers[(centerIdx - 1 + teachers.length) % teachers.length];
+  const right = teachers[(centerIdx + 1) % teachers.length];
+  const c     = teachers[centerIdx];
 
-  if (animate) {
-    setTimeout(() => { isAnimating = false; }, 600);
-  } else {
-    isAnimating = false;
-  }
+  document.getElementById("t-left").innerHTML = `
+    <div class="teacher-card__photo" style="background-image:url('${left.img}')"></div>
+    <h4>${left.name}</h4>
+    <div class="lines"><div class="line"></div><div class="line"></div></div>`;
+
+  document.getElementById("t-center").innerHTML = `
+    <div class="teacher-card__photo" style="background-image:url('${c.img}')"></div>
+    <h4>${c.name}</h4>
+    ${c.role ? `<div class="role">${c.role}</div>` : ""}
+    ${c.desc ? `<div class="desc">${c.desc}</div>` : ""}`;
+
+  document.getElementById("t-right").innerHTML = `
+    <div class="teacher-card__photo" style="background-image:url('${right.img}')"></div>
+    <h4>${right.name}</h4>
+    <div class="lines"><div class="line"></div><div class="line"></div></div>`;
 }
 
-function nextCard() {
-  if (isAnimating) return;
-  currentIndex = (currentIndex + 1) % cards.length;
-  centerCard(currentIndex);
-}
-
-function prevCard() {
-  if (isAnimating) return;
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-  centerCard(currentIndex);
-}
-
-nextBtn.addEventListener("click", nextCard);
-prevBtn.addEventListener("click", prevCard);
-
-cards.forEach((card, index) => {
-  card.addEventListener("click", () => {
-    if (index !== currentIndex) {
-      currentIndex = index;
-      centerCard(currentIndex);
-    }
-  });
+document.getElementById("prev").addEventListener("click", () => {
+  centerIdx = (centerIdx - 1 + teachers.length) % teachers.length;
+  renderCarousel();
+});
+document.getElementById("next").addEventListener("click", () => {
+  centerIdx = (centerIdx + 1) % teachers.length;
+  renderCarousel();
 });
 
-let touchStartX = 0;
-let touchEndX = 0;
-
-track.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-track.addEventListener("touchend", (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  const diff = touchStartX - touchEndX;
-  
-  if (Math.abs(diff) > 50) { 
-    if (diff > 0) {
-      nextCard(); 
-    } else {
-      prevCard(); 
-    }
-  }
-}, { passive: true });
-
-
-window.addEventListener("load", () => {
-  centerCard(currentIndex, false);
-});
-
-window.addEventListener("resize", () => {
-  centerCard(currentIndex, false);
-});
-
-
+// ===== Маска телефона =====
 const phoneInput = document.querySelector('input[name="phone"]');
 if (phoneInput) {
   phoneInput.addEventListener("input", (e) => {
@@ -128,7 +98,7 @@ if (phoneInput) {
   });
 }
 
-
+// ===== Отправка формы =====
 const API_URL = "https://jsonplaceholder.typicode.com/posts";
 const form = document.getElementById("contact-form");
 const submitBtn = document.getElementById("submit-btn");
@@ -182,7 +152,7 @@ if (form) {
     }
   });
 
-
+  // Убираем ошибку при вводе
   form.querySelectorAll("input").forEach(inp => {
     inp.addEventListener("input", () => inp.classList.remove("invalid"));
   });

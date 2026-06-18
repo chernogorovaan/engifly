@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="container header__inner">
     <a href="#" class="logo">Engifly</a>
@@ -27,6 +28,7 @@
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
     <h1>English Required<br>больше не остановит<br>твою <span class="blue">карьеру</span></h1>
@@ -35,6 +37,7 @@
   </div>
 </section>
 
+<!-- PROBLEMS -->
 <section class="problems">
   <div class="container">
     <h2 class="section-title">Мы убрали всё, из-за чего ты раньше <span class="pink">бросал английский</span></h2>
@@ -65,6 +68,7 @@
   </div>
 </section>
 
+<!-- HOW -->
 <section class="how" id="how">
   <div class="container">
     <div class="how__title-wrap">
@@ -91,6 +95,7 @@
   </div>
 </section>
 
+<!-- OUTCOMES -->
 <section class="outcomes">
   <div class="container">
     <h2 class="section-title">Что вы сможете<br><span class="pink">после курса</span></h2>
@@ -115,80 +120,48 @@
   </div>
 </section>
 
+<!-- TEACHERS -->
 <section class="teachers" id="teachers">
-    <div class="container">
-      <div class="teachers__title-wrap">
-        <span class="sparkle">✦</span>
-        <h2 class="section-title center" style="margin-bottom:0">Наши преподаватели</h2>
-        <span class="sparkle">✦</span>
-      </div>
-  
-      <div class="carousel">
-        <div class="carousel__track" id="carousel-track">
-          <div class="teacher-card">
-            <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=12')"></div>
-            <h4>Павел Р.</h4>
-            <div class="role">Преподаватель<br>General English</div>
-            <div class="desc">5 лет опыта. Специализация на разговорном английском и подготовке к рабочим встречам.</div>
-            <div class="lines">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
-  
-          <div class="teacher-card">
-            <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=47')"></div>
-            <h4>Анна Петрова</h4>
-            <div class="role">Преподаватель<br>Business English</div>
-            <div class="desc">6+ лет опыта преподавания. Помогает подготовиться к рабочим встречам, интервью и переписке на английском языке.</div>
-            <div class="lines">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
-  
-          <div class="teacher-card">
-            <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=32')"></div>
-            <h4>Ольга С.</h4>
-            <div class="role">IELTS / TOEFL<br>преподаватель</div>
-            <div class="desc">Сдала IELTS на 8.5. Помогает студентам достичь нужного балла и поступить в зарубежные университеты.</div>
-            <div class="lines">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
-  
-          <div class="teacher-card">
-            <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=68')"></div>
-            <h4>Дмитрий К.</h4>
-            <div class="role">IELTS Coach</div>
-            <div class="desc">Сдал IELTS на 9.0. Готовит к международным экзаменам и академическому письму.</div>
-            <div class="lines">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
+  <div class="container">
+    <div class="teachers__title-wrap">
+      <span class="sparkle">✦</span>
+      <h2 class="section-title center" style="margin-bottom:0">Наши преподаватели</h2>
+      <span class="sparkle">✦</span>
+    </div>
 
-          <div class="teacher-card">
-            <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=20')"></div>
-            <h4>Елена В.</h4>
-            <div class="role">General English</div>
-            <div class="desc">8 лет опыта. Специализация — разговорный английский для IT-специалистов.</div>
-            <div class="lines">
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
+    <div class="carousel">
+      <!-- Карточки -->
+      <div class="carousel__cards">
+        <div class="teacher-card" id="t-left">
+          <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=12')"></div>
+          <h4>Павел Р.</h4>
+          <div class="lines"><div class="line"></div><div class="line"></div></div>
         </div>
-  
-        <div class="carousel__controls">
-          <button class="carousel-btn" id="prev" aria-label="Назад">‹</button>
-          <button class="carousel-btn" id="next" aria-label="Вперёд">›</button>
+
+        <div class="teacher-card center" id="t-center">
+          <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=47')"></div>
+          <h4>Анна Петрова</h4>
+          <div class="role">Преподаватель<br>Business English</div>
+          <div class="desc">6+ лет опыта преподавания. Помогает подготовиться к рабочим встречам, интервью и переписке на английском языке.</div>
         </div>
+
+        <div class="teacher-card" id="t-right">
+          <div class="teacher-card__photo" style="background-image:url('https://i.pravatar.cc/200?img=32')"></div>
+          <h4>Ольга С.</h4>
+          <div class="lines"><div class="line"></div><div class="line"></div></div>
+        </div>
+      </div>
+
+      <!-- Стрелочки ПОД карточками -->
+      <div class="carousel__controls">
+        <button class="carousel-btn" id="prev" aria-label="Назад">‹</button>
+        <button class="carousel-btn" id="next" aria-label="Вперёд">›</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- REVIEWS -->
 <section class="reviews" id="reviews">
   <div class="container">
     <h2 class="section-title center">Отзывы наших<br>студентов</h2>
@@ -214,6 +187,7 @@
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta" id="cta">
   <div class="container">
     <h2>Готов начать<br><span class="blue">учить английский?</span></h2>
